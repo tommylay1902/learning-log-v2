@@ -1,10 +1,11 @@
+import { db } from "@/db";
 import { publicProcedure, router } from "./trpc";
+import { usersTable } from "@/db/schema";
 const appRouter = router({
-  userList: publicProcedure.query(async () => {
+  getManyUsers: publicProcedure.query(async () => {
     // Retrieve users from a datasource, this is an imaginary database
-    const users = await db.user.findMany();
+    const users = await db.select().from(usersTable);
 
-    const users: User[];
     return users;
   }),
 });
