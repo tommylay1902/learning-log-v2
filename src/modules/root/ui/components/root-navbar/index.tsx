@@ -1,8 +1,7 @@
 import AuthButton from "@/modules/auth/ui/components/auth-button";
 import Image from "next/image";
-import * as React from "react";
 
-const HomeNavbar = () => {
+const RootNavbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 bg-black/90 flex justify-between p-3">
       <div className="flex justify-center items-center">
@@ -21,4 +20,4 @@ const HomeNavbar = () => {
   );
 };
 
-export default HomeNavbar;
+export default RootNavbar;

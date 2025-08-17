@@ -1,20 +1,15 @@
-// import { relations } from "drizzle-orm";
-import {
-  uuid,
-  integer,
-  pgTable,
-  timestamp,
-  varchar,
-  text,
-  smallint,
-} from "drizzle-orm/pg-core";
+import { uuid, pgTable, timestamp, text, smallint } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  age: integer().notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
+  id: uuid("id").primaryKey().defaultRandom(),
+  clerkId: text("clerk_id").notNull(),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
+  emailAddress: text("").notNull(),
+  imageUrl: text("image_url"),
 });
+
+export type NewUser = typeof usersTable.$inferInsert;
 
 export const learningLogsTable = pgTable("learning_logs", {
   id: uuid("id").primaryKey().defaultRandom(),
