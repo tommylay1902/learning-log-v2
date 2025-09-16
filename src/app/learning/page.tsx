@@ -1,11 +1,15 @@
-import * as React from "react";
-
-// interface LearningProps {
-//   propName: type;
-// }
+import LearningView from "@/modules/learning-log/ui/views/learning-view";
+import { HydrateClient, trpc } from "@/trpc/server";
 
 const Learning = () => {
-  return <div>Learning</div>;
+    void trpc.learningLogs.getByManyByUser.prefetch();
+    void trpc.learningLogs.getLearningSegments.prefetch();
+    void trpc.categories.getManyByUser.prefetch();
+    return (
+        <HydrateClient>
+            <LearningView />
+        </HydrateClient>
+    );
 };
 
 export default Learning;

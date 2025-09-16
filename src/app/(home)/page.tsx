@@ -1,7 +1,14 @@
+import HomeView from "@/modules/home/ui/views/home-view";
+import { HydrateClient } from "@/trpc/server";
+
 import * as React from "react";
 
 const Home = () => {
-  return <div>Hello world</div>;
+    return (
+        <HydrateClient>
+            <HomeView />
+        </HydrateClient>
+    );
 };
 
 export default Home;
