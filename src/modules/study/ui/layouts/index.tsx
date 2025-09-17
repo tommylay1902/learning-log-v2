@@ -3,15 +3,13 @@ interface StudyLayoutProps {
 }
 
 import React from "react";
-import StudyNavbar from "../components/study-navbar";
+import StudyNavbar from "../components/navbar/study-navbar";
 
 const StudyLayout = ({ children }: StudyLayoutProps) => {
     return (
-        <div className="w-full">
+        <div className="w-full h-full">
+            {children}
             <StudyNavbar />
-            <div className="flex min-h-screen pt-[4rem]">
-                <main className="flex-1 overflow-y-scroll">{children}</main>
-            </div>
         </div>
     );
 };

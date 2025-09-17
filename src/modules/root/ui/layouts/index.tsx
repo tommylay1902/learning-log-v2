@@ -10,8 +10,8 @@ const ExchangeRootLayout: React.FC<ExchangeRootLayoutProps> = ({
     return (
         <div className="w-full">
             <RootNavbar />
-            <div className="flex min-h-screen pt-[4rem]">
-                <main className="flex-1 overflow-y-scroll">{children}</main>
+            <div className="flex min-h-screen pt-[4rem] overflow-clip">
+                <main className="flex-1">{children}</main>
             </div>
         </div>
     );

@@ -9,7 +9,7 @@ const navItems = [
     },
     {
         title: "Study",
-        link: "/study",
+        link: "/study/pomodoro",
     },
 ];
 const RootNavbar = () => {
