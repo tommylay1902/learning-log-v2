@@ -2,15 +2,24 @@
 import { useState } from "react";
 import Timer from "../components/timer";
 import ButtonModes from "../components/timer/button-modes";
+import RainContainer from "../components/rain-animation";
 
 const TimerSection = () => {
     const [toggleMode, setToggleMode] = useState("work");
-    const [initialTime, setInitialTime] = useState(3600);
+    const [timerActive, setTimerActive] = useState(false);
+    const [initialTime, setInitialTime] = useState(10);
 
     const handleToggleChange = (mode: string) => {
         setToggleMode(mode);
-        if (mode === "break") setInitialTime(600);
-        else setInitialTime(3600);
+        if (mode === "break") {
+            setInitialTime(600);
+            setTimerActive(false);
+        } else setInitialTime(3600);
+    };
+
+    const handleTimerActiveChange = (isTimerActive: boolean | null) => {
+        if (isTimerActive == null) setTimerActive((prev) => !prev);
+        else setTimerActive(isTimerActive);
     };
 
     return (
@@ -20,12 +29,19 @@ const TimerSection = () => {
                     <ButtonModes
                         handleToggleChange={handleToggleChange}
                         toggleMode={toggleMode}
+                        handleTimerActiveChange={handleTimerActiveChange}
                     />
                 </div>
                 <div>
-                    <Timer initialTime={initialTime} toggle={toggleMode} />
+                    <Timer
+                        initialTime={initialTime}
+                        toggle={toggleMode}
+                        handleToggleChange={handleToggleChange}
+                        handleTimerActiveChange={handleTimerActiveChange}
+                    />
                 </div>
             </div>
+            <RainContainer start={toggleMode === "work" && timerActive} />
         </div>
     );
 };

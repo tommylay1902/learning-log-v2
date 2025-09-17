@@ -22,14 +22,12 @@ const StudyNavbar = () => {
                     key={item.title}
                     className={
                         pathname === item.link
-                            ? "text-blue-500 scale-110 underline transform transition duration-300"
-                            : ""
+                            ? "text-blue-500 scale-110 underline transform transition duration-300 font-extrabold"
+                            : "hover:scale-110 transform transition font-bold hover:font-extrabold"
                     }
                 >
                     <Link href={item.link}>
-                        <span className="text-2xl font-extrabold">
-                            {item.title}
-                        </span>
+                        <span className="text-2xl">{item.title}</span>
                     </Link>
                 </div>
             ))}

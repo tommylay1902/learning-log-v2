@@ -1,31 +1,41 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 interface TimerProps {
     initialTime: number;
     toggle: string;
+    handleToggleChange: (mode: string) => void;
+    handleTimerActiveChange: (isTimerActive: boolean | null) => void;
 }
 
-const Timer: React.FC<TimerProps> = ({ initialTime = 3600 }) => {
+const Timer: React.FC<TimerProps> = ({
+    initialTime = 3600,
+    toggle,
+    handleToggleChange,
+    handleTimerActiveChange,
+}) => {
     const [time, setTime] = useState(initialTime);
     const [isRunning, setIsRunning] = useState(false);
-    const [isActive, setIsActive] = useState(false);
+
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-    const toggleRunning = () => {
+    const toggleTimer = () => {
         setIsRunning((prev) => !prev);
     };
 
-    useEffect(() => {
-        if (isActive) {
-        }
-    }, [isActive]);
+    const toggleRunning = useCallback(() => {
+        setIsRunning((prev) => !prev);
+    }, []);
+
+    const toggleTimerActive = useCallback(() => {
+        handleTimerActiveChange(null);
+    }, [handleTimerActiveChange]);
 
     useEffect(() => {
         setTime(initialTime);
         setIsRunning(false);
-        setIsActive(false);
+
         if (intervalRef.current) {
             clearInterval(intervalRef.current);
         }
@@ -38,8 +48,6 @@ const Timer: React.FC<TimerProps> = ({ initialTime = 3600 }) => {
                     if (prevTime <= 1) {
                         clearInterval(intervalRef.current as NodeJS.Timeout);
                         setIsRunning(false);
-                        setIsActive(false);
-
                         return 0;
                     }
                     return prevTime - 1;
@@ -50,31 +58,32 @@ const Timer: React.FC<TimerProps> = ({ initialTime = 3600 }) => {
         }
 
         return () => {
+            // handleTimerActiveChange(false);
             if (intervalRef.current) {
+                // handleTimerActiveChange(false);
                 clearInterval(intervalRef.current);
             }
         };
         // onComplete
-    }, [isRunning, time]);
+    }, [isRunning, time, handleTimerActiveChange]);
 
     useEffect(() => {
         if (time === 0) {
             const timer = setTimeout(() => {
                 setTime(initialTime);
                 alert("done!");
-                // onComplete();
+                handleToggleChange(toggle === "work" ? "break" : "work");
             }, 0);
 
             return () => clearTimeout(timer);
         }
-        // onComplete
-    }, [time, initialTime]);
+    }, [time, initialTime, handleToggleChange, toggle]);
 
     useEffect(() => {
         const handleKeyUpEvent = (event: KeyboardEvent) => {
             if (event.key === " ") {
                 toggleRunning();
-                setIsActive((prev) => !prev);
+                handleTimerActiveChange(null);
             }
         };
 
@@ -83,12 +92,7 @@ const Timer: React.FC<TimerProps> = ({ initialTime = 3600 }) => {
         return () => {
             window.removeEventListener("keyup", handleKeyUpEvent);
         };
-    }, []);
-
-    const toggleTimer = () => {
-        setIsActive(!isActive);
-        setIsRunning((prev) => !prev);
-    };
+    }, [toggleRunning, toggleTimerActive, handleTimerActiveChange]);
 
     return (
         <div className="text-center text-8xl font-bold flex flex-col items-center justify-center justify-items-center">
@@ -103,7 +107,7 @@ const Timer: React.FC<TimerProps> = ({ initialTime = 3600 }) => {
                     onClick={toggleTimer}
                     onMouseDown={(e) => e.preventDefault()}
                 >
-                    {isActive ? "Pause" : "Start"}
+                    {isRunning ? "Pause" : "Start"}
                 </Button>
             </div>
         </div>
