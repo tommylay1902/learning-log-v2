@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Timer from "../components/timer";
 import ButtonModes from "../components/timer/button-modes";
 import RainContainer from "../components/rain-animation";
+import Audio from "../components/audio";
 
 const TimerSection = () => {
     const [toggleMode, setToggleMode] = useState("work");
     const [timerActive, setTimerActive] = useState(false);
-    const [initialTime, setInitialTime] = useState(10);
+    const [initialTime, setInitialTime] = useState(3600);
+    const [isMuted, setIsMuted] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null);
 
     const handleToggleChange = (mode: string) => {
         setToggleMode(mode);
@@ -17,9 +20,25 @@ const TimerSection = () => {
         } else setInitialTime(3600);
     };
 
+    const handleMuteChange = (isMuted: boolean) => {
+        setIsMuted(isMuted);
+    };
+
     const handleTimerActiveChange = (isTimerActive: boolean | null) => {
         if (isTimerActive == null) setTimerActive((prev) => !prev);
         else setTimerActive(isTimerActive);
+
+        if (
+            audioRef.current &&
+            toggleMode === "work" &&
+            timerActive &&
+            !isMuted
+        ) {
+            console.log(toggleMode, timerActive);
+            audioRef.current
+                .play()
+                .catch((e) => console.error("Audio play failed:", e));
+        } else audioRef.current?.pause();
     };
 
     return (
@@ -42,6 +61,19 @@ const TimerSection = () => {
                 </div>
             </div>
             <RainContainer start={toggleMode === "work" && timerActive} />
+            <div
+                className={
+                    toggleMode === "work"
+                        ? "fixed bottom-20 left-14"
+                        : "invisible w-0 h-0"
+                }
+            >
+                <Audio
+                    isMuted={isMuted}
+                    ref={audioRef}
+                    handleMuteChange={handleMuteChange}
+                />
+            </div>
         </div>
     );
 };
