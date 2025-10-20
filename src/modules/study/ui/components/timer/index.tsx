@@ -96,7 +96,7 @@ const Timer: React.FC<TimerProps> = ({
   }, [toggleRunning, toggleTimerActive, handleTimerActiveChange, toggleTimer]);
 
   return (
-    <div className="text-center text-8xl font-bold flex flex-col items-center justify-center justify-items-center">
+    <div className="text-center lg:text-8xl font-bold flex flex-col items-center justify-center justify-items-center md:text-6xl text-3xl">
       <div>{isRunning ? "Focus" : "Stopped"}</div>
       <div>
         {Math.floor(time / 60).toFixed(0)}:{" "}

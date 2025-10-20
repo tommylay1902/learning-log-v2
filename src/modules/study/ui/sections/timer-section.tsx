@@ -39,8 +39,8 @@ const TimerSection = () => {
   }, [isMuted, timerActive, toggleMode]);
 
   return (
-    <div className="flex items-center justify-center mt-8">
-      <div className="bg-gray-900 shadow-xl min-w-[50vw] p-8 rounded-2xl">
+    <div className="flex items-center justify-center mt-8 ">
+      <div className="bg-gray-900 shadow-xl  p-8 rounded-2xl min-w-[40dvw] min-h-[45dvh]">
         <div className="flex justify-center items-center justify-items-center rounded-full">
           <ButtonModes
             handleToggleChange={handleToggleChange}
