@@ -30,10 +30,11 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
             >
               {isMuted ? <VolumeOff size={48} /> : <Volume2 size={48} />}
             </div>
+            {/*TODO: add animation*/}
             <div className="invisible group-hover:visible my-3">
               <Input
                 type="range"
-                step="0.05"
+                step="0.01"
                 min="0"
                 max="1"
                 value={volume}

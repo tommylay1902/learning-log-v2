@@ -4,6 +4,7 @@ import Timer from "../components/timer";
 import ButtonModes from "../components/timer/button-modes";
 import RainContainer from "../components/rain-animation";
 import Audio from "../components/audio";
+import { cn } from "@/lib/utils";
 
 const TimerSection = () => {
   const [toggleMode, setToggleMode] = useState("work");
@@ -30,7 +31,6 @@ const TimerSection = () => {
   };
 
   useEffect(() => {
-    console.log(toggleMode, timerActive);
     if (audioRef.current && toggleMode === "work" && timerActive && !isMuted) {
       audioRef.current
         .play()
@@ -40,8 +40,18 @@ const TimerSection = () => {
 
   return (
     <div className="flex items-center justify-center mt-8 ">
-      <div className="bg-gray-900 shadow-xl  p-8 rounded-2xl min-w-[40dvw] min-h-[45dvh]">
-        <div className="flex justify-center items-center justify-items-center rounded-full">
+      <div
+        className={cn(
+          "shadow-xl p-8 rounded-2xl min-w-[40dvw] min-h-[45dvh] transition duration-500 ease-in-out",
+          toggleMode === "work" && timerActive ? "" : "bg-gray-900",
+        )}
+      >
+        <div
+          className={cn(
+            "flex justify-center items-center justify-items-center rounded-full",
+            toggleMode === "work" && timerActive ? "invisible hidden" : "",
+          )}
+        >
           <ButtonModes
             handleToggleChange={handleToggleChange}
             toggleMode={toggleMode}
