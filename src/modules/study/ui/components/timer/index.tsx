@@ -7,6 +7,7 @@ interface TimerProps {
   toggle: string;
   handleToggleChange: (mode: string) => void;
   handleTimerActiveChange: (isTimerActive: boolean | null) => void;
+  title: string;
 }
 
 const Timer: React.FC<TimerProps> = ({
@@ -14,6 +15,7 @@ const Timer: React.FC<TimerProps> = ({
   toggle,
   handleToggleChange,
   handleTimerActiveChange,
+  title,
 }) => {
   const [time, setTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
@@ -54,19 +56,18 @@ const Timer: React.FC<TimerProps> = ({
           return prevTime - 1;
         });
       }, 1000);
+      document.title = `${Math.floor(time / 60).toFixed(0)}:${time % 60 <= 9 ? "0" + (time % 60) : time % 60}`;
     } else if (intervalRef.current) {
+      document.title = title;
       clearInterval(intervalRef.current);
     }
 
     return () => {
-      // handleTimerActiveChange(false);
       if (intervalRef.current) {
-        // handleTimerActiveChange(false);
         clearInterval(intervalRef.current);
       }
     };
-    // onComplete
-  }, [isRunning, time, handleTimerActiveChange]);
+  }, [isRunning, time, handleTimerActiveChange, title]);
 
   useEffect(() => {
     if (time === 0) {

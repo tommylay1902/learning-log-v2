@@ -3,15 +3,9 @@ interface StudyLayoutProps {
 }
 
 import React from "react";
-import StudyNavbar from "../components/navbar/study-navbar";
 
 const StudyLayout = ({ children }: StudyLayoutProps) => {
-  return (
-    <div className="w-full h-full">
-      {children}
-      <StudyNavbar />
-    </div>
-  );
+  return <div className="w-full h-full">{children}</div>;
 };
 
 export default StudyLayout;

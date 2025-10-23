@@ -18,7 +18,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Exchange",
+  title: {
+    template: "%s | Exchange",
+    default: "Exchange",
+  },
+
   description:
     "Achieve your goals through Equivalent Exchange—give effort, gain results. Track progress, stay accountable, and transform your habits into success. Log in, commit, and conquer your ambitions. Start your journey today!",
 };

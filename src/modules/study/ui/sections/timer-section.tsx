@@ -13,6 +13,8 @@ const TimerSection = () => {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const [originalTitle, setOriginalTitle] = useState<string>("");
+
   const handleToggleChange = (mode: string) => {
     setToggleMode(mode);
     if (mode === "break") {
@@ -37,6 +39,10 @@ const TimerSection = () => {
         .catch((e) => console.error("Audio play failed:", e));
     } else audioRef.current?.pause();
   }, [isMuted, timerActive, toggleMode]);
+
+  useEffect(() => {
+    setOriginalTitle(document.title);
+  }, []);
 
   return (
     <div className="flex items-center justify-center mt-8 ">
@@ -64,6 +70,7 @@ const TimerSection = () => {
             toggle={toggleMode}
             handleToggleChange={handleToggleChange}
             handleTimerActiveChange={handleTimerActiveChange}
+            title={originalTitle}
           />
         </div>
       </div>
