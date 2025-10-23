@@ -74,6 +74,7 @@ const Timer: React.FC<TimerProps> = ({
       const timer = setTimeout(() => {
         setTime(initialTime);
         alert("done!");
+
         handleToggleChange(toggle === "work" ? "break" : "work");
       }, 0);
 

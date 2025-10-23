@@ -19,8 +19,8 @@ const TimerSection = () => {
     setToggleMode(mode);
     if (mode === "break") {
       setInitialTime(600);
-      setTimerActive(false);
     } else setInitialTime(3600);
+    setTimerActive(false);
   };
 
   const handleMuteChange = (isMuted: boolean) => {
