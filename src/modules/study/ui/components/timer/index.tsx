@@ -56,7 +56,7 @@ const Timer: React.FC<TimerProps> = ({
           return prevTime - 1;
         });
       }, 1000);
-      document.title = `${Math.floor(time / 60).toFixed(0)}:${time % 60 <= 9 ? "0" + (time % 60) : time % 60}`;
+      document.title = `${toggle.toLocaleUpperCase()} | ${Math.floor(time / 60).toFixed(0)}:${time % 60 <= 9 ? "0" + (time % 60) : time % 60}`;
     } else if (intervalRef.current) {
       document.title = title;
       clearInterval(intervalRef.current);
@@ -67,7 +67,7 @@ const Timer: React.FC<TimerProps> = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning, time, handleTimerActiveChange, title]);
+  }, [isRunning, time, handleTimerActiveChange, title, toggle]);
 
   useEffect(() => {
     if (time === 0) {
