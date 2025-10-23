@@ -42,7 +42,7 @@ const TimerSection = () => {
     <div className="flex items-center justify-center mt-8 ">
       <div
         className={cn(
-          "shadow-xl p-8 rounded-2xl min-w-[40dvw] min-h-[45dvh] transition duration-500 ease-in-out",
+          "shadow-xl p-8 rounded-2xl min-w-[40dvw] lg:min-h-[40dvh]  transition duration-500 ease-in-out",
           toggleMode === "work" && timerActive ? "" : "bg-gray-900",
         )}
       >
