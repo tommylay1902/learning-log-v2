@@ -1,20 +1,20 @@
 import RootNavbar from "../components/root-navbar";
 
 interface ExchangeRootLayoutProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const ExchangeRootLayout: React.FC<ExchangeRootLayoutProps> = ({
-    children,
+  children,
 }) => {
-    return (
-        <div className="w-full">
-            <RootNavbar />
-            <div className="flex min-h-screen pt-[4rem]">
-                <main className="flex-1 overflow-y-scroll">{children}</main>
-            </div>
-        </div>
-    );
+  return (
+    <div className="w-full">
+      <RootNavbar />
+      <div className="flex min-h-screen pt-[4rem] overflow-clip">
+        <main className="flex-1">{children}</main>
+      </div>
+    </div>
+  );
 };
 
 export default ExchangeRootLayout;
