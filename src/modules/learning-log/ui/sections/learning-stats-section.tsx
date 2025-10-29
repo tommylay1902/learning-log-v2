@@ -4,17 +4,16 @@ import React, { Suspense } from "react";
 import LearningStats from "../components/learning-stats";
 
 const LearningStatsSection = () => {
-    return (
-        <Suspense>
-            <LearningStatsSectionSuspense />
-        </Suspense>
-    );
+  return (
+    <Suspense>
+      <LearningStatsSectionSuspense />
+    </Suspense>
+  );
 };
 
 const LearningStatsSectionSuspense = () => {
-    const [categories] = trpc.categories.getManyByUser.useSuspenseQuery();
-    console.table(categories);
-    return <LearningStats />;
+  const [categories] = trpc.categories.getManyByUser.useSuspenseQuery();
+  return <LearningStats />;
 };
 
 export default LearningStatsSection;
