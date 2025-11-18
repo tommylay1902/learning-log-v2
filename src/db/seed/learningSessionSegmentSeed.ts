@@ -24,6 +24,14 @@ export const seedLearningSessionSegments = async (
     },
     {
       learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("Go"),
+      )!.id,
+      timespent: 120,
+      notes:
+        "Spent two hours on 'Finding Dasher' just a basic simulation of door dash assignment algorithm, but really just trying to learn concurrency and interfacing with the open map api",
+    },
+    {
+      learningSessionId: learningSessions.find((ls) =>
         ls.title?.includes("seeding"),
       )!.id,
       notes: "Spent an hour building out the seeding data in learning-log-v2",

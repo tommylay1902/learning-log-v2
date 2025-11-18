@@ -38,6 +38,7 @@ export const learningLogRouter = createTRPCRouter({
     const data = await db
       .select({
         sessionId: learningSessionsTable.id,
+        title: learningSessionsTable.title,
         learningSessionSegmentsTable,
       })
       .from(learningSessionSegmentsTable)
