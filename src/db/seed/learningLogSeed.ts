@@ -17,7 +17,12 @@ export const seedLearningLogs = async (
     {
       title: "Learning Next",
       clerkId: userId,
-      categoryId: categories.find((category) => category.title === "go")!.id,
+      categoryId: categories.find((category) => category.title === "next")!.id,
+    },
+    {
+      title: "Leetcode grind",
+      clerkId: userId,
+      categoryId: categories.find((c) => c.title === "leetcode")!.id,
     },
   ];
 

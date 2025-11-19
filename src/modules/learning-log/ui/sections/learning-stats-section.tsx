@@ -12,8 +12,9 @@ const LearningStatsSection = () => {
 };
 
 const LearningStatsSectionSuspense = () => {
-  const [categories] = trpc.categories.getManyByUser.useSuspenseQuery();
-  return <LearningStats />;
+  const [categories] = trpc.categories.categoryByHours.useSuspenseQuery();
+
+  return <LearningStats data={categories} />;
 };
 
 export default LearningStatsSection;

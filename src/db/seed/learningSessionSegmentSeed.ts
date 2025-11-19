@@ -36,6 +36,20 @@ export const seedLearningSessionSegments = async (
       )!.id,
       notes: "Spent an hour building out the seeding data in learning-log-v2",
     },
+    {
+      learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("Dasher"),
+      )!.id,
+      timespent: 120,
+      notes: "Spent two hours grinding out finding dasher yezzir",
+    },
+    {
+      learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("LC"),
+      )!.id,
+      timespent: 120,
+      notes: "leetcode grind baby, tackled some DP problems",
+    },
   ];
 
   const result = await db

@@ -6,7 +6,7 @@ import {
 } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
-import { eq, isNotNull } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export const learningLogRouter = createTRPCRouter({
   getByManyByUser: protectedProcedure.query(async ({ ctx }) => {
@@ -23,7 +23,7 @@ export const learningLogRouter = createTRPCRouter({
 
     const groupedLogs = data.reduce(
       (acc, val) => {
-        const date = val.learning_logs.createdAt.toLocaleDateString();
+        const date = val.learning_sessions.startTime.toLocaleDateString();
         if (!acc[date]) {
           acc[date] = [val];
         } else acc[date].push(val);
@@ -34,6 +34,7 @@ export const learningLogRouter = createTRPCRouter({
 
     return groupedLogs;
   }),
+
   getLearningSegments: protectedProcedure.query(async ({}) => {
     const data = await db
       .select({

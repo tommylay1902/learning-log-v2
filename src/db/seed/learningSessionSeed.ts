@@ -9,9 +9,25 @@ export const seedLearningSessions = async (
 ): Promise<SeedResult> => {
   const now = new Date();
 
+  const yesterday = new Date(now);
+
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  const fdStart = new Date(yesterday);
+  fdStart.setHours(12, 0, 0, 0);
+
+  const fdEndTime = new Date(yesterday);
+  fdEndTime.setHours(14, 0, 0, 0);
+
+  const lcStartTime = new Date(yesterday);
+  lcStartTime.setHours(14, 0, 0, 0);
+
+  const lcEndTime = new Date(yesterday);
+  lcEndTime.setHours(16, 0, 0, 0);
+
   const data: LearningSessionRow[] = [
     {
-      title: "Go slices and byte arrays",
+      title: "Go Internals",
       startTime: new Date(now.getTime() - 3 * 60 * 60 * 1000),
       endTime: now,
       learningLogId: learningLogs.find((ll) => ll.title.includes("Go"))!.id,
@@ -21,6 +37,19 @@ export const seedLearningSessions = async (
       startTime: new Date(now.getTime() - 5 * 60 * 60 * 1000),
       endTime: new Date(now.getTime() - 4 * 60 * 60 * 1000),
       learningLogId: learningLogs.find((ll) => ll.title.includes("Next"))!.id,
+    },
+    {
+      title: "Finding Dasher",
+      startTime: fdStart,
+      endTime: fdEndTime,
+      learningLogId: learningLogs.find((ll) => ll.title.includes("Go"))!.id,
+    },
+    {
+      title: "LC Time !",
+      startTime: lcStartTime,
+      endTime: lcEndTime,
+      learningLogId: learningLogs.find((ll) => ll.title.includes("Leetcode"))!
+        .id,
     },
   ];
 

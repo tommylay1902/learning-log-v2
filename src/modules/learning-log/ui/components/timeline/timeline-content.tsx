@@ -13,7 +13,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React from "react";
-import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
