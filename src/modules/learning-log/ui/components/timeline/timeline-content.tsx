@@ -43,22 +43,17 @@ const TimelineContent = ({
 }: TimelineContentProps) => {
   return (
     <div className="cursor-pointer">
-      <Accordion type="single" collapsible className="border-b-2">
+      <Accordion type="single" collapsible className="border-b-2 mr-4">
         <AccordionItem value={`item-${segments[0].sessionId}`}>
           <AccordionTrigger>
-            <div className="flex w-full justify-between  font-bold cursor-pointer">
+            <div className="flex w-full justify-between font-bold cursor-pointer">
               <div className="w-fit text-xl text-center">
                 {startTime.toLocaleTimeString()}-{endTime.toLocaleTimeString()}
               </div>
-              <Separator orientation="vertical" className="bg-white h-5" />
 
-              <div className="w-65 text-center text-xl">
-                {segments[0].title}
-              </div>
+              <div className=" text-center text-xl">{segments[0].title}</div>
 
-              <Separator orientation="vertical" className="bg-white h-5" />
-
-              <div className="w-40 text-xl flex items-center gap-x-2">
+              <div className="text-xl flex items-center gap-x-2">
                 Time:{" "}
                 {segments
                   .reduce(

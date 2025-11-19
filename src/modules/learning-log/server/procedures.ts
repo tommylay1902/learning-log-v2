@@ -6,7 +6,7 @@ import {
 } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
-import { eq } from "drizzle-orm";
+import { eq, isNotNull } from "drizzle-orm";
 
 export const learningLogRouter = createTRPCRouter({
   getByManyByUser: protectedProcedure.query(async ({ ctx }) => {
