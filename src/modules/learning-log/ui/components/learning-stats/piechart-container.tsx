@@ -23,6 +23,7 @@ interface PiechartContainerProps {
 }
 
 const PiechartContainer = ({ data }: PiechartContainerProps) => {
+  console.log("eat cheese");
   return (
     <Card className="flex flex-col border-0 bg-inherit">
       {/*animate-float-up delay-700 opacity-0*/}

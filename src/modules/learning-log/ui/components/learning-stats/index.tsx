@@ -38,6 +38,7 @@ const LearningStats = ({ data }: LearningStatsProps) => {
 
   // if (error) console.error(error);
   // const filteredDate = data?.filter((d) => d.time_spent[0].sum > 0) ?? [];
+
   return (
     <div className="flex flex-row items-center justify-center space-x-4 mb-2 min-w-screen ">
       <Project />

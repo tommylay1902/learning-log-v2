@@ -1,7 +1,32 @@
 services:
   exchange-app:
+    restart: unless-stopped
     ports:
       - "3000:3000"
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./:/app
+      - ./apps/web/node_modules:/app/apps/web/node_modules
+      - ./apps/web/.next:/app/apps/web/.next
     build:
       context: .
       dockerfile: ".Dockerfile"
+    networks:
+      - app-network
+
+  ngrok:
+    image: ngrok/ngrok:alpine
+    command: http --url=willing-adder-initially.ngrok-free.app exchange-app:3000
+    environment:
+      - NGROK_AUTHTOKEN=35i2uUBP0TZEGn8PLSrQgFGiUFu_2VcUNsixBetjgHiJiutWo
+    ports:
+      - "4040:4040" # ngrok web interface
+    depends_on:
+      - exchange-app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
