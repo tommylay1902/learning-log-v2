@@ -1,0 +1,64 @@
+import { db } from "@/db";
+import {
+  learningLogsTable,
+  learningSessionSegmentsTable,
+  learningSessionsTable,
+} from "../schema";
+import { SeedResult } from "./seed";
+
+type LearningSessionSegmentRow =
+  typeof learningSessionSegmentsTable.$inferInsert;
+
+export const seedLearningSessionSegments = async (
+  learningSessions: (typeof learningSessionsTable.$inferSelect)[],
+): Promise<SeedResult> => {
+  const date = new Date();
+
+  const data: LearningSessionSegmentRow[] = [
+    {
+      learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("Go"),
+      )!.id,
+      notes:
+        "Spent an hour going through a go.dev article on bytes vs runes and deep diving into how slices work in go",
+    },
+    {
+      learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("Go"),
+      )!.id,
+      timespent: 120,
+      notes:
+        "Spent two hours on 'Finding Dasher' just a basic simulation of door dash assignment algorithm, but really just trying to learn concurrency and interfacing with the open map api",
+    },
+    {
+      learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("seeding"),
+      )!.id,
+      notes: "Spent an hour building out the seeding data in learning-log-v2",
+    },
+    {
+      learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("Dasher"),
+      )!.id,
+      timespent: 120,
+      notes: "Spent two hours grinding out finding dasher yezzir",
+    },
+    {
+      learningSessionId: learningSessions.find((ls) =>
+        ls.title?.includes("LC"),
+      )!.id,
+      timespent: 120,
+      notes: "leetcode grind baby, tackled some DP problems",
+    },
+  ];
+
+  const result = await db
+    .insert(learningSessionSegmentsTable)
+    .values(data)
+    .returning();
+
+  return [
+    `${data.length} Learning Session Segments succesfully inserted`,
+    result,
+  ];
+};

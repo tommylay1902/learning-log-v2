@@ -1,16 +1,16 @@
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { SquareArrowOutUpRight } from "lucide-react";
 import React from "react";
 
 const Resource = () => {
-    return (
-        // animate-fade-in delay-700 opacity-0
-        <div className="min-w-[30vw] text-center ">
-            <h1 className="font-bold text-2xl inline-flex items-baseline justify-center gap-x-2">
+  return (
+    // animate-fade-in delay-700 opacity-0
+    <div className="min-w-[30vw] text-center ">
+      {/*<h1 className="font-bold text-2xl inline-flex items-baseline justify-center gap-x-2">
                 Current reading resources
             </h1>
             <ul className="text-2xl text-blue">
@@ -60,9 +60,9 @@ const Resource = () => {
                         </Tooltip>
                     </div>
                 </li>
-            </ul>
-        </div>
-    );
+            </ul>*/}
+    </div>
+  );
 };
 
 export default Resource;

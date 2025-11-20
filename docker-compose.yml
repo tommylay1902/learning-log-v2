@@ -1,0 +1,27 @@
+services:
+  exchange-app:
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      dockerfile: ".Dockerfile"
+    networks:
+      - app-network
+
+  ngrok:
+    image: ngrok/ngrok:alpine
+    command: http --url=willing-adder-initially.ngrok-free.app exchange-app:3000
+    restart: unless-stopped
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    ports:
+      - "4040:4040" # ngrok web interface
+    depends_on:
+      - exchange-app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

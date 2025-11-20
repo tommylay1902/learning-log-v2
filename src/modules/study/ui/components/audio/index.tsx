@@ -12,7 +12,6 @@ const Audio = forwardRef<HTMLAudioElement, AudioProps>(
     const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
       if (!ref || !("current" in ref) || !ref.current || !event.target) return;
       ref.current.volume = +event.target.value;
-      console.table(ref.current.volume);
     };
     return (
       <div className={`flex items-center gap-4 `}>
