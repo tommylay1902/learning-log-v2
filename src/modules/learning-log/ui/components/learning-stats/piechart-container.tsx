@@ -20,10 +20,10 @@ interface PiechartContainerProps {
     total_time: number;
     color: string;
   }[];
+  weeklyHours: number;
 }
 
-const PiechartContainer = ({ data }: PiechartContainerProps) => {
-  console.log("eat cheese");
+const PiechartContainer = ({ data, weeklyHours }: PiechartContainerProps) => {
   return (
     <Card className="flex flex-col border-0 bg-inherit">
       {/*animate-float-up delay-700 opacity-0*/}
@@ -33,8 +33,8 @@ const PiechartContainer = ({ data }: PiechartContainerProps) => {
       <CardContent className="flex-1 pb-0">
         <LearningPieChart data={data} />
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm animate-float-up opacity-0 delay-700">
-        <h1 className="flex gap-x-2">
+      <CardFooter className="flex-col gap-2 text-sm">
+        {/*<h1 className="flex gap-x-2">
           Total Working Hours Logged:
           <Tooltip>
             <TooltipTrigger asChild>
@@ -53,11 +53,8 @@ const PiechartContainer = ({ data }: PiechartContainerProps) => {
               </p>
             </TooltipContent>
           </Tooltip>
-        </h1>
-        <h1>
-          Total hours spent this week:{" "}
-          {/*{((weeklyHours * 50) / 60).toFixed(2)}*/}
-        </h1>
+        </h1>*/}
+        <h1>Total hours spent this week: {(weeklyHours / 60).toFixed(2)}hrs</h1>
       </CardFooter>
     </Card>
   );

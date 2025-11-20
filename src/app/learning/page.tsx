@@ -5,6 +5,8 @@ const Learning = () => {
   void trpc.learningLogs.getByManyByUser.prefetch();
   void trpc.learningLogs.getLearningSegments.prefetch();
   void trpc.categories.categoryByHours.prefetch();
+  void trpc.userLearningStats.getWeeklyHours.prefetch();
+
   return (
     <HydrateClient>
       <LearningView />

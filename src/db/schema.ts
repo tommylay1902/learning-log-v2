@@ -1,4 +1,11 @@
-import { uuid, pgTable, timestamp, text, smallint } from "drizzle-orm/pg-core";
+import {
+  uuid,
+  pgTable,
+  timestamp,
+  text,
+  smallint,
+  real,
+} from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -85,6 +92,17 @@ export const learningSessionSegmentsTable = pgTable(
     ),
   },
 );
+
+export const userLearningStatsTable = pgTable("user_learning_stats", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  weeklyHours: real("weekly_hours").default(0),
+  totalHours: real("total_hours").default(0),
+  userId: text("user_id")
+    .references(() => usersTable.clerkId, {
+      onDelete: "cascade",
+    })
+    .unique(),
+});
 
 // using join syntax so this won't be necessary but keeping just in case
 // export const learningSessionSegmentsTableRelations = relations(

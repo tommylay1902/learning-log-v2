@@ -9,8 +9,9 @@ interface LearningStatsProps {
     total_time: number;
     color: string;
   }[];
+  weeklyHours: number;
 }
-const LearningStats = ({ data }: LearningStatsProps) => {
+const LearningStats = ({ data, weeklyHours }: LearningStatsProps) => {
   // const supabase = createClient();
   // const { data, error } = await supabase
   //   .from("category")
@@ -42,7 +43,7 @@ const LearningStats = ({ data }: LearningStatsProps) => {
   return (
     <div className="flex flex-row items-center justify-center space-x-4 mb-2 min-w-screen ">
       <Project />
-      <PiechartContainer data={data} />
+      <PiechartContainer data={data} weeklyHours={weeklyHours} />
       <Resource />
     </div>
   );

@@ -8,6 +8,7 @@ import {
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
 import { eq, sql } from "drizzle-orm";
+
 export const categoryRouter = createTRPCRouter({
   getManyByUser: protectedProcedure.query(({ ctx }) => {
     if (!ctx.clerkUserId) throw new TRPCError({ code: "UNAUTHORIZED" });
